@@ -2,14 +2,19 @@
 
 let cartData=JSON.parse(localStorage.getItem("coffee"))
 // console.log(cartData)
-// let total=cartData.reduce(function(sum,el,index,arr){
-//     return sum+Number(el)
-// },0)
-// let length=cartData.length
+var total=cartData.reduce(function(sum,el){
+    return sum+Number(el.price)
 
-//  document.querySelector("total_amount").innerText=`${length}`
+},0)
 
-cartData.forEach(function(el){
+  var length=cartData.length
+console.log(length)
+
+console.log(total)
+
+document.querySelector("h3").innerHTML=`  ${length}  ${total}`;
+
+cartData.forEach(function(el,index){
     let div=document.createElement("div")
     let image=document.createElement("img");
     image.src=el.image;
@@ -21,15 +26,17 @@ image.style.width="200px"
 
     let remove=document.createElement("button")
     remove.innerText="Remove"
-    
+    remove.addEventListener("click",function(){
+       removedata(el,index)
+       function removedata(el,index){
+        cartData.splice(index,1) 
+        localStorage.setItem("coffee",JSON.stringify(cartData))
+        location.reload()
+    }
 
-    let bucket=document.createElement("button")
-    bucket.innerText="Bucket"
-    bucket.addEventListener("click",function(){
-    addtocart(el)
     })
 
-div.append(image,price,bucket,remove)
+div.append(image,price,remove)
    
 document.getElementById("bucket").append(div)
 })

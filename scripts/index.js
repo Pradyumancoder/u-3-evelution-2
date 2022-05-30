@@ -1,5 +1,5 @@
 // Add the coffee to local storage with key "coffee"
-const url= "https://masai-mock-api.herokuapp.com/coffee/menu"
+const url= `https://masai-mock-api.herokuapp.com/coffee/menu`
 let container=document.getElementById("menu")
 
 fetch(url)
@@ -18,6 +18,7 @@ fetch(url)
 .catch(function(err){
     console.log(err)
 })
+let cartData=JSON.parse(localStorage.getItem("coffee"))||[]
 function appendData(data){
 
     // console.log(data)
@@ -45,7 +46,7 @@ div.append(image,price,bucket)
 })
 
 }
-let cartData=JSON.parse(localStorage.getItem("coffee"))||[]
+
 function addtocart(el){
     console.log(cartData);
 cartData.push(el)
